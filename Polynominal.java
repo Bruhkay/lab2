@@ -126,19 +126,7 @@ public class Polynominal {
         return result;
     }
     Polynominal mul(Polynominal p2){
-        int max = Math.max(this.getDegree(), p2.getDegree());
-        Polynominal result = new Polynominal(0,this.coefficientList.get(0) - p2.coefficientList.get(0));
-        for (int i = 1; i <= max; i++) {
-            if(i < this.coefficientList.size() && p2.coefficientList.size() > i){    
-                result.coefficientList.add(this.coefficientList.get(i) * p2.coefficientList.get(i));
-            }
-            else if(i >= this.coefficientList.size()){
-                result.coefficientList.add( p2.coefficientList.get(i) );
-            }   
-            else if(i >= p2.coefficientList.size()){
-                result.coefficientList.add( this.coefficientList.get(i) );
-            }  
-        }
-        return result;
+        //TODO
+        return null;
     }
 }
