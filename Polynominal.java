@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class Polynominal {
 
-    ArrayList<Double> coefficientList = new ArrayList<Double>();
+    private ArrayList<Double> coefficientList = new ArrayList<Double>();
 
     Polynominal(int power , double coefficient ){
         for(int i = 0 ; i<power; i++){
@@ -126,7 +126,29 @@ public class Polynominal {
         return result;
     }
     Polynominal mul(Polynominal p2){
-        //TODO
-        return null;
+        Polynominal result = new Polynominal( this.getDegree() * p2.getDegree(), 0);
+        
+        for(int i = 0; i< this.coefficientList.size(); i++){
+            for(int k = 0; k< p2.coefficientList.size(); k++){
+                if(result.coefficientList.get(i+k) == 0){
+                    result.coefficientList.set(i+k, this.coefficientList.get(i) * p2.coefficientList.get(k));
+                }
+                else{
+                    double temp = (this.coefficientList.get(i) * p2.coefficientList.get(k)) + result.coefficientList.get(i+k);
+                    result.coefficientList.set(i+k, temp);    
+                }
+            }
+        }
+        return result;
+    }
+    Polynominal compose(Polynominal p2){
+        int max = Math.max(this.getDegree(), p2.getDegree());
+        Polynominal result = new Polynominal( max, 0);
+        
+        for(int i = 0 ; i < this.getDegree(); i++){
+            //Todo
+        }
+
+        return result;
     }
 }
