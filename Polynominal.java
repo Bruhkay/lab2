@@ -167,10 +167,37 @@ public class Polynominal {
         }
         return result;
     }
-    
-    Polynominal div(Polynominal p2){
-        Polynominal result = new Polynominal();
 
+    Polynominal div(Polynominal p2){ //kagida yaz
+
+        double[] k = {3, 4.0, 1.0, 3, 0, 2};
+        Polynominal result = new Polynominal();
+        boolean isTerminated = false;
+        
+        Polynominal main = new Polynominal(k);
+        
+        for(int i = 0 ; i<4 ; i++){
+
+        
+            int bigLeading = main.coefficientList.size()-1;
+            int smallLeading = p2.coefficientList.size()-1;
+
+            Polynominal temp = new Polynominal(bigLeading-smallLeading, (int)(main.coefficientList.get(bigLeading)/ p2.coefficientList.get(smallLeading))); 
+            Polynominal cons = new Polynominal(0,(int)(main.coefficientList.get(bigLeading)/ p2.coefficientList.get(smallLeading)));
+
+            System.out.println("current    "+main);
+            
+            
+            System.out.println("temp   " + temp);
+
+            main = main.sub(temp.mul(p2).mul(cons));
+            
+            result = result.add(temp);
+            
+            if(bigLeading < smallLeading){
+                isTerminated = true;
+            }
+        }
 
         return result;
     }
