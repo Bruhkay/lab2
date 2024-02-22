@@ -126,7 +126,7 @@ public class Polynominal {
         return result;
     }
     Polynominal mul(Polynominal p2){
-        Polynominal result = new Polynominal( this.getDegree() * p2.getDegree() + 1, 0);
+        Polynominal result = new Polynominal( 10 + 1 , 0); //should be recover again
         
         for(int i = 0; i< this.coefficientList.size(); i++){
             for(int k = 0; k< p2.coefficientList.size(); k++){
@@ -150,20 +150,27 @@ public class Polynominal {
     Polynominal compose(Polynominal p2){
         int max = Math.max(this.getDegree(), p2.getDegree());
         Polynominal result = new Polynominal( max, 0);
+        Polynominal temp2 = new Polynominal( 0, this.coefficientList.get(0) );
+        result.coefficientList.set(0, this.coefficientList.get(0));
         
         for(int i = 1 ; i < this.coefficientList.size(); i++){
             
             if( i == 1){
-                result = p2;
+                temp2 = p2;
             }
-            for(int k = 2; k< i ; k++){
-                result = p2.mul(p2);
+            for(int k = 1; k< i ; k++){
+                temp2 = p2.mul(p2);
             }
 
-            Polynominal temp2 = new Polynominal( 0, this.coefficientList.get(i) );
-            result = result.add(p2.mul(temp2));
-            
+            Polynominal temp3 = new Polynominal( 0, this.coefficientList.get(i) );
+            result = result.add(temp2.mul(temp3));            
         }
+        return result;
+    }
+    
+    Polynominal div(Polynominal p2){
+        Polynominal result = new Polynominal();
+
 
         return result;
     }
