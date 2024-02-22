@@ -32,7 +32,6 @@ public class Polynominal {
         coefficientList.add(0.0);
     }
     /**
-     * 
      * @return degree of polynominal
      */
     int getDegree(){
@@ -93,6 +92,11 @@ public class Polynominal {
         }
         return result / x ;
     }
+    /**
+     * this method calculates the sum of the given 2 polynominal
+     * @param p2 is the polynominal that we have took from the user
+     * @return the returning value is the sum of the 2 polynominal
+     */
     Polynominal add(Polynominal p2){
         int max = Math.max(this.getDegree(), p2.getDegree());
         Polynominal result = new Polynominal(0,this.coefficientList.get(0) + p2.coefficientList.get(0));
@@ -109,6 +113,11 @@ public class Polynominal {
         }
         return result;
     }
+    /**
+     * this method is subtracting the given polynominal from main polynominal
+     * @param p2 is the polynominal that we have took from the user
+     * @return the result of substraction
+     */
     Polynominal sub(Polynominal p2){
         int max = Math.max(this.getDegree(), p2.getDegree());
         Polynominal result = new Polynominal(0,this.coefficientList.get(0) - p2.coefficientList.get(0));
@@ -125,15 +134,21 @@ public class Polynominal {
         }
         return result;
     }
+    /**
+     * this method calculates multiple of given 2 polynominal
+     * @param p2 is the polynominal that we have took from the user
+     * @return multiple of given 2 polynominal
+     */
     Polynominal mul(Polynominal p2){
-        Polynominal result = new Polynominal( 10 + 1 , 0); //should be recover again
+        Polynominal result = new Polynominal( this.getDegree() + p2.getDegree() , 0); 
         
         for(int i = 0; i< this.coefficientList.size(); i++){
             for(int k = 0; k< p2.coefficientList.size(); k++){
-                if(result.coefficientList.get(i+k) == 0){
+                if(result.coefficientList.get(i+k) == 0){ //this checks whether this degree is already calculated or not.
                     result.coefficientList.set(i+k, this.coefficientList.get(i) * p2.coefficientList.get(k));
                 }
-                else{
+                //If its calculated, then we add additional coefficients on it
+                else{ 
                     double temp = (this.coefficientList.get(i) * p2.coefficientList.get(k)) + result.coefficientList.get(i+k);
                     result.coefficientList.set(i+k, temp);    
                 }
@@ -143,9 +158,9 @@ public class Polynominal {
     }
     
     /**
-     * 
-     * @param p2
-     * @return
+     * composes the polynominal
+     * @param p2 is the polynominal that we have took from the user
+     * @return composed polynominal
      */
     Polynominal compose(Polynominal p2){
         int max = Math.max(this.getDegree(), p2.getDegree());
@@ -155,19 +170,25 @@ public class Polynominal {
         
         for(int i = 1 ; i < this.coefficientList.size(); i++){
             
-            if( i == 1){
+            if( i == 1){ //if there are coefficient with degree 1
                 temp2 = p2;
             }
-            for(int k = 1; k< i ; k++){
+
+            for(int k = 1; k< i ; k++){ //this multiplies the p2 polynominal according to degree of main polynominal
                 temp2 = p2.mul(p2);
             }
 
-            Polynominal temp3 = new Polynominal( 0, this.coefficientList.get(i) );
+            Polynominal temp3 = new Polynominal( 0, this.coefficientList.get(i) ); // this is for constants
             result = result.add(temp2.mul(temp3));            
         }
         return result;
     }
 
+    /**
+     * 
+     * @param p2 is the polynominal that we have took from the user
+     * @return quotient of the division of two polynominal
+     */
     Polynominal div(Polynominal p2){ 
         double[] k = {3, 4.0, 1.0, 3, 0, 2};
         Polynominal main = new Polynominal(k);
@@ -175,7 +196,8 @@ public class Polynominal {
         int bigLeading = main.getDegree();
         int smallLeading = p2.getDegree();
         boolean isTerminated = false;
-        while(!isTerminated){
+
+        while(!isTerminated){ //this will repeated until bigLeading become smaller than smallLeading
             Polynominal temp = new Polynominal(bigLeading-smallLeading, 
             (int)(main.coefficientList.get(bigLeading)/ p2.coefficientList.get(smallLeading))); 
             main = main.sub(p2.mul(temp));
@@ -187,6 +209,12 @@ public class Polynominal {
         }
         return result;
     }
+
+    /**
+     * 
+     * @param p2 is the polynominal that we have took from the user
+     * @return this method returns the common roots of polynominals
+     */
     int[] findEqual(Polynominal p2){
 
         ArrayList<Integer> temp = new ArrayList<Integer>();
