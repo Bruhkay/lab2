@@ -167,7 +167,7 @@ public class Polynominal {
         }
         return result;
     }
-    
+
     Polynominal div(Polynominal p2){ 
         double[] k = {3, 4.0, 1.0, 3, 0, 2};
         Polynominal main = new Polynominal(k);
@@ -184,6 +184,21 @@ public class Polynominal {
             if(bigLeading < smallLeading){
                 isTerminated = true;
             }
+        }
+        return result;
+    }
+    int[] findEqual(Polynominal p2){
+
+        ArrayList<Integer> temp = new ArrayList<Integer>();
+
+        for(int i = 1 ; i <= 200; i++){
+            if(this.eval(i) == p2.eval(i)){
+                temp.add(i);
+            }
+        }
+        int[] result = new int[temp.size()];
+        for (int k = 0; k< temp.size(); k++) {
+            result[k] = temp.get(k);
         }
         return result;
     }
