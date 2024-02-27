@@ -190,8 +190,7 @@ public class Polynominal {
      * @return quotient of the division of two polynominal
      */
     Polynominal div(Polynominal p2){ 
-        double[] k = {3, 4.0, 1.0, 3, 0, 2};
-        Polynominal main = new Polynominal(k);
+        Polynominal main = this;
         Polynominal result = new Polynominal();
         int bigLeading = main.getDegree();
         int smallLeading = p2.getDegree();
